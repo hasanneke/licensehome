@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:licensehome/shared/model/guest.dart';
+import 'package:licensehome/shared/model/notification.dart';
 
 import 'package:licensehome/shared/model/resident.dart';
 
 enum Collection {
   users,
-  guests;
+  guests,
+  notifications;
 
   CollectionReference collection<T>() {
     switch (this) {
@@ -24,6 +26,14 @@ enum Collection {
                   Guest.fromJson(snapshot.data() ?? {}).copyWith(
                 id: snapshot.id,
               ),
+              toFirestore: (value, options) => value.toJson(),
+            );
+      case Collection.notifications:
+        return FirebaseFirestore.instance
+            .collection(name)
+            .withConverter<ResidentNotification>(
+              fromFirestore: (snapshot, options) =>
+                  ResidentNotification.fromJson(snapshot.data() ?? {}),
               toFirestore: (value, options) => value.toJson(),
             );
     }

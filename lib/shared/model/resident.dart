@@ -10,10 +10,9 @@ class Resident with _$Resident {
   const Resident._();
   factory Resident({
     @Default('') String id,
-    @TimestampConverter()
-    @JsonKey(name: 'createDate')
-    required DateTime createdAt,
-    @Default('') String owner,
+    @TimestampConverter() @Default('') String owner,
+    @Default(false) bool isGuest,
+    Resident? guestOwner,
     @Default('') String ownerSuit,
     @Default('') String phone,
     @Default('') String plate,
@@ -24,7 +23,6 @@ class Resident with _$Resident {
       _$ResidentFromJson(json);
   static Resident get test => Resident(
         id: '000000',
-        createdAt: DateTime.now(),
         owner: 'Hasan Eke',
         ownerSuit: 'Pirirreis mah.',
         phone: '5511235471',

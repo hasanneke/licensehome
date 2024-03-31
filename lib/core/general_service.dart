@@ -8,4 +8,5 @@ abstract class GeneralService<T> {
 
   Future<void> delete(String id);
   Future<T?> get(String id);
+  Stream<List<T>> stream({List<GeneralFilter> filters = const []});
 }

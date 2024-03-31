@@ -19,7 +19,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Guest guest) addGuest,
+    required TResult Function(Resident resident) addGuest,
     required TResult Function(Guest guest) updateGuest,
     required TResult Function() logout,
   }) =>
@@ -27,7 +27,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Guest guest)? addGuest,
+    TResult? Function(Resident resident)? addGuest,
     TResult? Function(Guest guest)? updateGuest,
     TResult? Function()? logout,
   }) =>
@@ -35,7 +35,7 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Guest guest)? addGuest,
+    TResult Function(Resident resident)? addGuest,
     TResult Function(Guest guest)? updateGuest,
     TResult Function()? logout,
     required TResult orElse(),
@@ -124,7 +124,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Guest guest) addGuest,
+    required TResult Function(Resident resident) addGuest,
     required TResult Function(Guest guest) updateGuest,
     required TResult Function() logout,
   }) {
@@ -135,7 +135,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Guest guest)? addGuest,
+    TResult? Function(Resident resident)? addGuest,
     TResult? Function(Guest guest)? updateGuest,
     TResult? Function()? logout,
   }) {
@@ -146,7 +146,7 @@ class _$StartedImpl implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Guest guest)? addGuest,
+    TResult Function(Resident resident)? addGuest,
     TResult Function(Guest guest)? updateGuest,
     TResult Function()? logout,
     required TResult orElse(),
@@ -205,9 +205,9 @@ abstract class _$$AddGuestImplCopyWith<$Res> {
           _$AddGuestImpl value, $Res Function(_$AddGuestImpl) then) =
       __$$AddGuestImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Guest guest});
+  $Res call({Resident resident});
 
-  $GuestCopyWith<$Res> get guest;
+  $ResidentCopyWith<$Res> get resident;
 }
 
 /// @nodoc
@@ -221,21 +221,21 @@ class __$$AddGuestImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? guest = null,
+    Object? resident = null,
   }) {
     return _then(_$AddGuestImpl(
-      guest: null == guest
-          ? _value.guest
-          : guest // ignore: cast_nullable_to_non_nullable
-              as Guest,
+      resident: null == resident
+          ? _value.resident
+          : resident // ignore: cast_nullable_to_non_nullable
+              as Resident,
     ));
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $GuestCopyWith<$Res> get guest {
-    return $GuestCopyWith<$Res>(_value.guest, (value) {
-      return _then(_value.copyWith(guest: value));
+  $ResidentCopyWith<$Res> get resident {
+    return $ResidentCopyWith<$Res>(_value.resident, (value) {
+      return _then(_value.copyWith(resident: value));
     });
   }
 }
@@ -243,14 +243,14 @@ class __$$AddGuestImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AddGuestImpl implements _AddGuest {
-  const _$AddGuestImpl({required this.guest});
+  const _$AddGuestImpl({required this.resident});
 
   @override
-  final Guest guest;
+  final Resident resident;
 
   @override
   String toString() {
-    return 'HomeEvent.addGuest(guest: $guest)';
+    return 'HomeEvent.addGuest(resident: $resident)';
   }
 
   @override
@@ -258,11 +258,12 @@ class _$AddGuestImpl implements _AddGuest {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddGuestImpl &&
-            (identical(other.guest, guest) || other.guest == guest));
+            (identical(other.resident, resident) ||
+                other.resident == resident));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, guest);
+  int get hashCode => Object.hash(runtimeType, resident);
 
   @JsonKey(ignore: true)
   @override
@@ -274,35 +275,35 @@ class _$AddGuestImpl implements _AddGuest {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Guest guest) addGuest,
+    required TResult Function(Resident resident) addGuest,
     required TResult Function(Guest guest) updateGuest,
     required TResult Function() logout,
   }) {
-    return addGuest(guest);
+    return addGuest(resident);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Guest guest)? addGuest,
+    TResult? Function(Resident resident)? addGuest,
     TResult? Function(Guest guest)? updateGuest,
     TResult? Function()? logout,
   }) {
-    return addGuest?.call(guest);
+    return addGuest?.call(resident);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Guest guest)? addGuest,
+    TResult Function(Resident resident)? addGuest,
     TResult Function(Guest guest)? updateGuest,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
     if (addGuest != null) {
-      return addGuest(guest);
+      return addGuest(resident);
     }
     return orElse();
   }
@@ -346,9 +347,9 @@ class _$AddGuestImpl implements _AddGuest {
 }
 
 abstract class _AddGuest implements HomeEvent {
-  const factory _AddGuest({required final Guest guest}) = _$AddGuestImpl;
+  const factory _AddGuest({required final Resident resident}) = _$AddGuestImpl;
 
-  Guest get guest;
+  Resident get resident;
   @JsonKey(ignore: true)
   _$$AddGuestImplCopyWith<_$AddGuestImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -429,7 +430,7 @@ class _$UpdateGuestImpl implements _UpdateGuest {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Guest guest) addGuest,
+    required TResult Function(Resident resident) addGuest,
     required TResult Function(Guest guest) updateGuest,
     required TResult Function() logout,
   }) {
@@ -440,7 +441,7 @@ class _$UpdateGuestImpl implements _UpdateGuest {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Guest guest)? addGuest,
+    TResult? Function(Resident resident)? addGuest,
     TResult? Function(Guest guest)? updateGuest,
     TResult? Function()? logout,
   }) {
@@ -451,7 +452,7 @@ class _$UpdateGuestImpl implements _UpdateGuest {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Guest guest)? addGuest,
+    TResult Function(Resident resident)? addGuest,
     TResult Function(Guest guest)? updateGuest,
     TResult Function()? logout,
     required TResult orElse(),
@@ -548,7 +549,7 @@ class _$LogoutImpl implements _Logout {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() started,
-    required TResult Function(Guest guest) addGuest,
+    required TResult Function(Resident resident) addGuest,
     required TResult Function(Guest guest) updateGuest,
     required TResult Function() logout,
   }) {
@@ -559,7 +560,7 @@ class _$LogoutImpl implements _Logout {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
-    TResult? Function(Guest guest)? addGuest,
+    TResult? Function(Resident resident)? addGuest,
     TResult? Function(Guest guest)? updateGuest,
     TResult? Function()? logout,
   }) {
@@ -570,7 +571,7 @@ class _$LogoutImpl implements _Logout {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
-    TResult Function(Guest guest)? addGuest,
+    TResult Function(Resident resident)? addGuest,
     TResult Function(Guest guest)? updateGuest,
     TResult Function()? logout,
     required TResult orElse(),
@@ -628,21 +629,22 @@ mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Guest> guests, Resident resident) loaded,
+    required TResult Function(Resident resident, List<Resident> residents)
+        loaded,
     required TResult Function() exit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<Guest> guests, Resident resident)? loaded,
+    TResult? Function(Resident resident, List<Resident> residents)? loaded,
     TResult? Function()? exit,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Guest> guests, Resident resident)? loaded,
+    TResult Function(Resident resident, List<Resident> residents)? loaded,
     TResult Function()? exit,
     required TResult orElse(),
   }) =>
@@ -727,7 +729,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Guest> guests, Resident resident) loaded,
+    required TResult Function(Resident resident, List<Resident> residents)
+        loaded,
     required TResult Function() exit,
   }) {
     return initial();
@@ -737,7 +740,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<Guest> guests, Resident resident)? loaded,
+    TResult? Function(Resident resident, List<Resident> residents)? loaded,
     TResult? Function()? exit,
   }) {
     return initial?.call();
@@ -747,7 +750,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Guest> guests, Resident resident)? loaded,
+    TResult Function(Resident resident, List<Resident> residents)? loaded,
     TResult Function()? exit,
     required TResult orElse(),
   }) {
@@ -802,7 +805,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Guest> guests, Resident resident});
+  $Res call({Resident resident, List<Resident> residents});
 
   $ResidentCopyWith<$Res> get resident;
 }
@@ -818,18 +821,18 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? guests = null,
     Object? resident = null,
+    Object? residents = null,
   }) {
     return _then(_$LoadedImpl(
-      guests: null == guests
-          ? _value._guests
-          : guests // ignore: cast_nullable_to_non_nullable
-              as List<Guest>,
       resident: null == resident
           ? _value.resident
           : resident // ignore: cast_nullable_to_non_nullable
               as Resident,
+      residents: null == residents
+          ? _value._residents
+          : residents // ignore: cast_nullable_to_non_nullable
+              as List<Resident>,
     ));
   }
 
@@ -846,23 +849,22 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 class _$LoadedImpl implements _Loaded {
   const _$LoadedImpl(
-      {required final List<Guest> guests, required this.resident})
-      : _guests = guests;
-
-  final List<Guest> _guests;
-  @override
-  List<Guest> get guests {
-    if (_guests is EqualUnmodifiableListView) return _guests;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_guests);
-  }
+      {required this.resident, required final List<Resident> residents})
+      : _residents = residents;
 
   @override
   final Resident resident;
+  final List<Resident> _residents;
+  @override
+  List<Resident> get residents {
+    if (_residents is EqualUnmodifiableListView) return _residents;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_residents);
+  }
 
   @override
   String toString() {
-    return 'HomeState.loaded(guests: $guests, resident: $resident)';
+    return 'HomeState.loaded(resident: $resident, residents: $residents)';
   }
 
   @override
@@ -870,14 +872,15 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            const DeepCollectionEquality().equals(other._guests, _guests) &&
             (identical(other.resident, resident) ||
-                other.resident == resident));
+                other.resident == resident) &&
+            const DeepCollectionEquality()
+                .equals(other._residents, _residents));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_guests), resident);
+      runtimeType, resident, const DeepCollectionEquality().hash(_residents));
 
   @JsonKey(ignore: true)
   @override
@@ -889,32 +892,33 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Guest> guests, Resident resident) loaded,
+    required TResult Function(Resident resident, List<Resident> residents)
+        loaded,
     required TResult Function() exit,
   }) {
-    return loaded(guests, resident);
+    return loaded(resident, residents);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<Guest> guests, Resident resident)? loaded,
+    TResult? Function(Resident resident, List<Resident> residents)? loaded,
     TResult? Function()? exit,
   }) {
-    return loaded?.call(guests, resident);
+    return loaded?.call(resident, residents);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Guest> guests, Resident resident)? loaded,
+    TResult Function(Resident resident, List<Resident> residents)? loaded,
     TResult Function()? exit,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(guests, resident);
+      return loaded(resident, residents);
     }
     return orElse();
   }
@@ -956,11 +960,11 @@ class _$LoadedImpl implements _Loaded {
 
 abstract class _Loaded implements HomeState {
   const factory _Loaded(
-      {required final List<Guest> guests,
-      required final Resident resident}) = _$LoadedImpl;
+      {required final Resident resident,
+      required final List<Resident> residents}) = _$LoadedImpl;
 
-  List<Guest> get guests;
   Resident get resident;
+  List<Resident> get residents;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1004,7 +1008,8 @@ class _$ExitImpl implements _Exit {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Guest> guests, Resident resident) loaded,
+    required TResult Function(Resident resident, List<Resident> residents)
+        loaded,
     required TResult Function() exit,
   }) {
     return exit();
@@ -1014,7 +1019,7 @@ class _$ExitImpl implements _Exit {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<Guest> guests, Resident resident)? loaded,
+    TResult? Function(Resident resident, List<Resident> residents)? loaded,
     TResult? Function()? exit,
   }) {
     return exit?.call();
@@ -1024,7 +1029,7 @@ class _$ExitImpl implements _Exit {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Guest> guests, Resident resident)? loaded,
+    TResult Function(Resident resident, List<Resident> residents)? loaded,
     TResult Function()? exit,
     required TResult orElse(),
   }) {

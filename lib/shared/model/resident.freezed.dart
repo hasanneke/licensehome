@@ -22,9 +22,9 @@ Resident _$ResidentFromJson(Map<String, dynamic> json) {
 mixin _$Resident {
   String get id => throw _privateConstructorUsedError;
   @TimestampConverter()
-  @JsonKey(name: 'createDate')
-  DateTime get createdAt => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
+  bool get isGuest => throw _privateConstructorUsedError;
+  Resident? get guestOwner => throw _privateConstructorUsedError;
   String get ownerSuit => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String get plate => throw _privateConstructorUsedError;
@@ -43,12 +43,15 @@ abstract class $ResidentCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @TimestampConverter() @JsonKey(name: 'createDate') DateTime createdAt,
-      String owner,
+      @TimestampConverter() String owner,
+      bool isGuest,
+      Resident? guestOwner,
       String ownerSuit,
       String phone,
       String plate,
       VehicleType? type});
+
+  $ResidentCopyWith<$Res>? get guestOwner;
 }
 
 /// @nodoc
@@ -65,8 +68,9 @@ class _$ResidentCopyWithImpl<$Res, $Val extends Resident>
   @override
   $Res call({
     Object? id = null,
-    Object? createdAt = null,
     Object? owner = null,
+    Object? isGuest = null,
+    Object? guestOwner = freezed,
     Object? ownerSuit = null,
     Object? phone = null,
     Object? plate = null,
@@ -77,14 +81,18 @@ class _$ResidentCopyWithImpl<$Res, $Val extends Resident>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as String,
+      isGuest: null == isGuest
+          ? _value.isGuest
+          : isGuest // ignore: cast_nullable_to_non_nullable
+              as bool,
+      guestOwner: freezed == guestOwner
+          ? _value.guestOwner
+          : guestOwner // ignore: cast_nullable_to_non_nullable
+              as Resident?,
       ownerSuit: null == ownerSuit
           ? _value.ownerSuit
           : ownerSuit // ignore: cast_nullable_to_non_nullable
@@ -103,6 +111,18 @@ class _$ResidentCopyWithImpl<$Res, $Val extends Resident>
               as VehicleType?,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ResidentCopyWith<$Res>? get guestOwner {
+    if (_value.guestOwner == null) {
+      return null;
+    }
+
+    return $ResidentCopyWith<$Res>(_value.guestOwner!, (value) {
+      return _then(_value.copyWith(guestOwner: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -115,12 +135,16 @@ abstract class _$$ResidentImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      @TimestampConverter() @JsonKey(name: 'createDate') DateTime createdAt,
-      String owner,
+      @TimestampConverter() String owner,
+      bool isGuest,
+      Resident? guestOwner,
       String ownerSuit,
       String phone,
       String plate,
       VehicleType? type});
+
+  @override
+  $ResidentCopyWith<$Res>? get guestOwner;
 }
 
 /// @nodoc
@@ -135,8 +159,9 @@ class __$$ResidentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? createdAt = null,
     Object? owner = null,
+    Object? isGuest = null,
+    Object? guestOwner = freezed,
     Object? ownerSuit = null,
     Object? phone = null,
     Object? plate = null,
@@ -147,14 +172,18 @@ class __$$ResidentImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as String,
+      isGuest: null == isGuest
+          ? _value.isGuest
+          : isGuest // ignore: cast_nullable_to_non_nullable
+              as bool,
+      guestOwner: freezed == guestOwner
+          ? _value.guestOwner
+          : guestOwner // ignore: cast_nullable_to_non_nullable
+              as Resident?,
       ownerSuit: null == ownerSuit
           ? _value.ownerSuit
           : ownerSuit // ignore: cast_nullable_to_non_nullable
@@ -180,10 +209,9 @@ class __$$ResidentImplCopyWithImpl<$Res>
 class _$ResidentImpl extends _Resident {
   _$ResidentImpl(
       {this.id = '',
-      @TimestampConverter()
-      @JsonKey(name: 'createDate')
-      required this.createdAt,
-      this.owner = '',
+      @TimestampConverter() this.owner = '',
+      this.isGuest = false,
+      this.guestOwner,
       this.ownerSuit = '',
       this.phone = '',
       this.plate = '',
@@ -197,12 +225,14 @@ class _$ResidentImpl extends _Resident {
   @JsonKey()
   final String id;
   @override
+  @JsonKey()
   @TimestampConverter()
-  @JsonKey(name: 'createDate')
-  final DateTime createdAt;
+  final String owner;
   @override
   @JsonKey()
-  final String owner;
+  final bool isGuest;
+  @override
+  final Resident? guestOwner;
   @override
   @JsonKey()
   final String ownerSuit;
@@ -217,7 +247,7 @@ class _$ResidentImpl extends _Resident {
 
   @override
   String toString() {
-    return 'Resident(id: $id, createdAt: $createdAt, owner: $owner, ownerSuit: $ownerSuit, phone: $phone, plate: $plate, type: $type)';
+    return 'Resident(id: $id, owner: $owner, isGuest: $isGuest, guestOwner: $guestOwner, ownerSuit: $ownerSuit, phone: $phone, plate: $plate, type: $type)';
   }
 
   @override
@@ -226,9 +256,10 @@ class _$ResidentImpl extends _Resident {
         (other.runtimeType == runtimeType &&
             other is _$ResidentImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
             (identical(other.owner, owner) || other.owner == owner) &&
+            (identical(other.isGuest, isGuest) || other.isGuest == isGuest) &&
+            (identical(other.guestOwner, guestOwner) ||
+                other.guestOwner == guestOwner) &&
             (identical(other.ownerSuit, ownerSuit) ||
                 other.ownerSuit == ownerSuit) &&
             (identical(other.phone, phone) || other.phone == phone) &&
@@ -238,8 +269,8 @@ class _$ResidentImpl extends _Resident {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, createdAt, owner, ownerSuit, phone, plate, type);
+  int get hashCode => Object.hash(runtimeType, id, owner, isGuest, guestOwner,
+      ownerSuit, phone, plate, type);
 
   @JsonKey(ignore: true)
   @override
@@ -258,10 +289,9 @@ class _$ResidentImpl extends _Resident {
 abstract class _Resident extends Resident {
   factory _Resident(
       {final String id,
-      @TimestampConverter()
-      @JsonKey(name: 'createDate')
-      required final DateTime createdAt,
-      final String owner,
+      @TimestampConverter() final String owner,
+      final bool isGuest,
+      final Resident? guestOwner,
       final String ownerSuit,
       final String phone,
       final String plate,
@@ -275,10 +305,11 @@ abstract class _Resident extends Resident {
   String get id;
   @override
   @TimestampConverter()
-  @JsonKey(name: 'createDate')
-  DateTime get createdAt;
-  @override
   String get owner;
+  @override
+  bool get isGuest;
+  @override
+  Resident? get guestOwner;
   @override
   String get ownerSuit;
   @override

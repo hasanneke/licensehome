@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:gap/gap.dart';
-import 'package:licensehome/feature/home/widgets/add_guest/model/add_guest_form.dart';
 
 import 'package:licensehome/shared/model/guest.dart';
 import 'package:licensehome/shared/model/resident.dart';
@@ -11,10 +12,10 @@ import 'package:licensehome/shared/model/resident.dart';
 class AddGuest extends StatelessWidget {
   AddGuest({
     super.key,
-    this.guest,
+    this.resident,
   });
   final _formKey = GlobalKey<FormBuilderState>();
-  final Guest? guest;
+  final Resident? resident;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -29,7 +30,7 @@ class AddGuest extends StatelessWidget {
             children: [
               FormBuilderTextField(
                 name: 'plate',
-                initialValue: guest?.plate,
+                initialValue: resident?.plate,
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(),
                 ]),
@@ -37,8 +38,8 @@ class AddGuest extends StatelessWidget {
               ),
               const Gap(8),
               FormBuilderTextField(
-                name: 'name',
-                initialValue: guest?.name,
+                name: 'owner',
+                initialValue: resident?.owner,
                 decoration: const InputDecoration(hintText: 'Misafir ismi'),
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(),
@@ -47,19 +48,19 @@ class AddGuest extends StatelessWidget {
               const Gap(8),
               FormBuilderDropdown(
                   name: 'carType',
-                  initialValue: guest?.type ?? 'car',
+                  initialValue: resident?.type,
                   validator: FormBuilderValidators.compose([
                     FormBuilderValidators.required(),
                   ]),
                   items: const [
                     DropdownMenuItem(
-                      value: 'motorcycle',
+                      value: VehicleType.motorcycle,
                       child: Text(
                         'Motor',
                       ),
                     ),
                     DropdownMenuItem(
-                      value: 'car',
+                      value: VehicleType.car,
                       child: Text(
                         'Araba',
                       ),
@@ -72,28 +73,28 @@ class AddGuest extends StatelessWidget {
                     _formKey.currentState!.save();
                     final value = _formKey.currentState?.value ?? {};
 
-                    final form = AddGuestForm.fromJson(value);
-                    if (guest == null) {
+                    final form = Resident.fromJson(value);
+                    if (resident == null) {
                       Navigator.of(context).pop(
-                        Guest(
-                          createdAt: DateTime.now(),
-                          name: form.name,
+                        Resident(
+                          owner: form.owner,
                           plate: form.plate,
-                          type: form.carType,
-                          resident: Resident.test,
+                          type: form.type,
+                          isGuest: true,
+                          guestOwner: Resident.test,
                         ),
                       );
                     } else {
-                      final updatedGuest = guest!.copyWith(
-                        name: form.name,
+                      final updatedGuest = resident!.copyWith(
+                        owner: form.owner,
                         plate: form.plate,
-                        type: form.carType,
+                        type: form.type,
                       );
                       Navigator.of(context).pop(updatedGuest);
                     }
                   }
                 },
-                child: Text(guest == null ? 'Ekle' : 'Güncelle'),
+                child: Text(resident == null ? 'Ekle' : 'Güncelle'),
               ),
             ],
           ),

@@ -43,13 +43,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           );
           final resident = await residentService
               .get(FirebaseAuth.instance.currentUser?.uid ?? '');
+          final residents = await residentService.fetch(filters: [
+            GeneralFilter(
+              field: 'guestOwner.id',
+              filter: FireFilter.isEqualTo,
+              value: FirebaseAuth.instance.currentUser?.uid,
+            ),
+          ]);
           emit(HomeState.loaded(
-            guests: res,
-            resident: resident!,
+            residents: residents,
+            resident: resident ?? Resident(),
           ));
         },
         addGuest: (guest) async {
-          await guestService.create(guest);
+          await residentService.create(guest);
           add(const HomeEvent.started());
         },
       );
