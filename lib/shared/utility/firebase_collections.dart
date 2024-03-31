@@ -18,7 +18,11 @@ enum Collection {
               fromFirestore: (snapshot, options) =>
                   Resident.fromJson(snapshot.data() ?? {})
                       .copyWith(id: snapshot.id),
-              toFirestore: (value, options) => value.toJson(),
+              toFirestore: (value, options) {
+                final data = value.toJson();
+                data.remove('id');
+                return data;
+              },
             );
       case Collection.guests:
         return FirebaseFirestore.instance.collection(name).withConverter<Guest>(
@@ -26,7 +30,11 @@ enum Collection {
                   Guest.fromJson(snapshot.data() ?? {}).copyWith(
                 id: snapshot.id,
               ),
-              toFirestore: (value, options) => value.toJson(),
+              toFirestore: (value, options) {
+                final data = value.toJson();
+                data.remove('id');
+                return data;
+              },
             );
       case Collection.notifications:
         return FirebaseFirestore.instance
@@ -34,7 +42,11 @@ enum Collection {
             .withConverter<ResidentNotification>(
               fromFirestore: (snapshot, options) =>
                   ResidentNotification.fromJson(snapshot.data() ?? {}),
-              toFirestore: (value, options) => value.toJson(),
+              toFirestore: (value, options) {
+                final data = value.toJson();
+                data.remove('id');
+                return data;
+              },
             );
     }
   }

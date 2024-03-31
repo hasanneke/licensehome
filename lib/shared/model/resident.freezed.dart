@@ -22,6 +22,8 @@ Resident _$ResidentFromJson(Map<String, dynamic> json) {
 mixin _$Resident {
   String get id => throw _privateConstructorUsedError;
   @TimestampConverter()
+  DateTime? get enteredAt => throw _privateConstructorUsedError;
+  String? get entryTime => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
   bool get isGuest => throw _privateConstructorUsedError;
   Resident? get guestOwner => throw _privateConstructorUsedError;
@@ -29,6 +31,7 @@ mixin _$Resident {
   String get phone => throw _privateConstructorUsedError;
   String get plate => throw _privateConstructorUsedError;
   VehicleType? get type => throw _privateConstructorUsedError;
+  bool get isRead => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,13 +46,16 @@ abstract class $ResidentCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      @TimestampConverter() String owner,
+      @TimestampConverter() DateTime? enteredAt,
+      String? entryTime,
+      String owner,
       bool isGuest,
       Resident? guestOwner,
       String ownerSuit,
       String phone,
       String plate,
-      VehicleType? type});
+      VehicleType? type,
+      bool isRead});
 
   $ResidentCopyWith<$Res>? get guestOwner;
 }
@@ -68,6 +74,8 @@ class _$ResidentCopyWithImpl<$Res, $Val extends Resident>
   @override
   $Res call({
     Object? id = null,
+    Object? enteredAt = freezed,
+    Object? entryTime = freezed,
     Object? owner = null,
     Object? isGuest = null,
     Object? guestOwner = freezed,
@@ -75,12 +83,21 @@ class _$ResidentCopyWithImpl<$Res, $Val extends Resident>
     Object? phone = null,
     Object? plate = null,
     Object? type = freezed,
+    Object? isRead = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      enteredAt: freezed == enteredAt
+          ? _value.enteredAt
+          : enteredAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      entryTime: freezed == entryTime
+          ? _value.entryTime
+          : entryTime // ignore: cast_nullable_to_non_nullable
+              as String?,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -109,6 +126,10 @@ class _$ResidentCopyWithImpl<$Res, $Val extends Resident>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as VehicleType?,
+      isRead: null == isRead
+          ? _value.isRead
+          : isRead // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -135,13 +156,16 @@ abstract class _$$ResidentImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      @TimestampConverter() String owner,
+      @TimestampConverter() DateTime? enteredAt,
+      String? entryTime,
+      String owner,
       bool isGuest,
       Resident? guestOwner,
       String ownerSuit,
       String phone,
       String plate,
-      VehicleType? type});
+      VehicleType? type,
+      bool isRead});
 
   @override
   $ResidentCopyWith<$Res>? get guestOwner;
@@ -159,6 +183,8 @@ class __$$ResidentImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? enteredAt = freezed,
+    Object? entryTime = freezed,
     Object? owner = null,
     Object? isGuest = null,
     Object? guestOwner = freezed,
@@ -166,12 +192,21 @@ class __$$ResidentImplCopyWithImpl<$Res>
     Object? phone = null,
     Object? plate = null,
     Object? type = freezed,
+    Object? isRead = null,
   }) {
     return _then(_$ResidentImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      enteredAt: freezed == enteredAt
+          ? _value.enteredAt
+          : enteredAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      entryTime: freezed == entryTime
+          ? _value.entryTime
+          : entryTime // ignore: cast_nullable_to_non_nullable
+              as String?,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -200,6 +235,10 @@ class __$$ResidentImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as VehicleType?,
+      isRead: null == isRead
+          ? _value.isRead
+          : isRead // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -209,13 +248,16 @@ class __$$ResidentImplCopyWithImpl<$Res>
 class _$ResidentImpl extends _Resident {
   _$ResidentImpl(
       {this.id = '',
-      @TimestampConverter() this.owner = '',
+      @TimestampConverter() this.enteredAt,
+      this.entryTime,
+      this.owner = '',
       this.isGuest = false,
       this.guestOwner,
       this.ownerSuit = '',
       this.phone = '',
       this.plate = '',
-      this.type})
+      this.type,
+      this.isRead = true})
       : super._();
 
   factory _$ResidentImpl.fromJson(Map<String, dynamic> json) =>
@@ -225,8 +267,12 @@ class _$ResidentImpl extends _Resident {
   @JsonKey()
   final String id;
   @override
-  @JsonKey()
   @TimestampConverter()
+  final DateTime? enteredAt;
+  @override
+  final String? entryTime;
+  @override
+  @JsonKey()
   final String owner;
   @override
   @JsonKey()
@@ -244,10 +290,13 @@ class _$ResidentImpl extends _Resident {
   final String plate;
   @override
   final VehicleType? type;
+  @override
+  @JsonKey()
+  final bool isRead;
 
   @override
   String toString() {
-    return 'Resident(id: $id, owner: $owner, isGuest: $isGuest, guestOwner: $guestOwner, ownerSuit: $ownerSuit, phone: $phone, plate: $plate, type: $type)';
+    return 'Resident(id: $id, enteredAt: $enteredAt, entryTime: $entryTime, owner: $owner, isGuest: $isGuest, guestOwner: $guestOwner, ownerSuit: $ownerSuit, phone: $phone, plate: $plate, type: $type, isRead: $isRead)';
   }
 
   @override
@@ -256,6 +305,10 @@ class _$ResidentImpl extends _Resident {
         (other.runtimeType == runtimeType &&
             other is _$ResidentImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.enteredAt, enteredAt) ||
+                other.enteredAt == enteredAt) &&
+            (identical(other.entryTime, entryTime) ||
+                other.entryTime == entryTime) &&
             (identical(other.owner, owner) || other.owner == owner) &&
             (identical(other.isGuest, isGuest) || other.isGuest == isGuest) &&
             (identical(other.guestOwner, guestOwner) ||
@@ -264,13 +317,14 @@ class _$ResidentImpl extends _Resident {
                 other.ownerSuit == ownerSuit) &&
             (identical(other.phone, phone) || other.phone == phone) &&
             (identical(other.plate, plate) || other.plate == plate) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.isRead, isRead) || other.isRead == isRead));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, owner, isGuest, guestOwner,
-      ownerSuit, phone, plate, type);
+  int get hashCode => Object.hash(runtimeType, id, enteredAt, entryTime, owner,
+      isGuest, guestOwner, ownerSuit, phone, plate, type, isRead);
 
   @JsonKey(ignore: true)
   @override
@@ -289,13 +343,16 @@ class _$ResidentImpl extends _Resident {
 abstract class _Resident extends Resident {
   factory _Resident(
       {final String id,
-      @TimestampConverter() final String owner,
+      @TimestampConverter() final DateTime? enteredAt,
+      final String? entryTime,
+      final String owner,
       final bool isGuest,
       final Resident? guestOwner,
       final String ownerSuit,
       final String phone,
       final String plate,
-      final VehicleType? type}) = _$ResidentImpl;
+      final VehicleType? type,
+      final bool isRead}) = _$ResidentImpl;
   _Resident._() : super._();
 
   factory _Resident.fromJson(Map<String, dynamic> json) =
@@ -305,6 +362,10 @@ abstract class _Resident extends Resident {
   String get id;
   @override
   @TimestampConverter()
+  DateTime? get enteredAt;
+  @override
+  String? get entryTime;
+  @override
   String get owner;
   @override
   bool get isGuest;
@@ -318,6 +379,8 @@ abstract class _Resident extends Resident {
   String get plate;
   @override
   VehicleType? get type;
+  @override
+  bool get isRead;
   @override
   @JsonKey(ignore: true)
   _$$ResidentImplCopyWith<_$ResidentImpl> get copyWith =>

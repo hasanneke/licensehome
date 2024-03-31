@@ -78,10 +78,12 @@ class AddGuest extends StatelessWidget {
                       Navigator.of(context).pop(
                         Resident(
                           owner: form.owner,
-                          plate: form.plate,
+                          plate: form.plate.trim(),
                           type: form.type,
                           isGuest: true,
+                          entryTime: 'not_set',
                           guestOwner: Resident.test,
+                          isRead: false,
                         ),
                       );
                     } else {
